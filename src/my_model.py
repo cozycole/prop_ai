@@ -20,13 +20,6 @@ class NewModel(nn.Module):
         
         # change prediction class count
         model.fc = nn.Linear(model.fc.in_features, 3)
-
-        # freeze first 6 layers 
-        # for i, layer in enumerate(model.children()):
-        #     if i < 6:
-        #         for param in layer.parameters():
-        #             param.requires_grad = False
-
         self.model = model
 
     def forward(self, x):

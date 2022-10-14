@@ -8,7 +8,7 @@ def train_loop(dataloader, model: torch.nn.Module, loss_fn, optimizer, curr_epoc
     model.train()
     size = len(dataloader.dataset)
     loop = tqdm(enumerate(dataloader), total=len(dataloader), leave=False)
-    for batch, (X, y) in loop:
+    for batch, (X, y, paths) in loop:
         X, y = X.cuda(), y.cuda()
         pred = model(X)
 
@@ -31,7 +31,7 @@ def valid_loop(dataloader: torch.utils.data.DataLoader, model: torch.nn.Module, 
     
     model.eval()
     with torch.no_grad():
-        for X, y in dataloader:
+        for X, y, paths in dataloader:
             X, y = X.cuda(), y.cuda()
             predictions = model(X)
             test_loss += loss_fn(predictions, y).item()
@@ -64,7 +64,7 @@ def test_loop(dataloader: torch.utils.data.DataLoader, model: torch.nn.Module, l
     distress_recall_fn = 0
     model.eval()
     with torch.no_grad():
-        for X, y in dataloader:
+        for X, y, paths in dataloader:
             X, y = X.cuda(), y.cuda()
             predictions = model(X)
             test_loss += loss_fn(predictions, y).item()
