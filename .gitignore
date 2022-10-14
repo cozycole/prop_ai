@@ -1,0 +1,11 @@
+marked_data
+model_data
+data
+old_data
+runs
+loss_graph*
+myenv
+__pycache__
+.ipynb_checkpoints
+*.png
+*.jpg
